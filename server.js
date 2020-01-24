@@ -19,9 +19,23 @@ app.get("/", function (req, res) {
 });
 
 
+const os = require('os');
+let networkInterfaces = os.networkInterfaces();
+
+
+
 // your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+app.get("/api/whoami", function (req, res) {
+  let ip;
+  //GET IP ADDRESS  -  https://stackoverflow.com/questions/3653065/get-local-ip-address-in-node-js
+  Object.keys(networkInterfaces).forEach((networkInterface) => {
+    networkInterfaces[networkInterface].forEach((element) => {
+      if(element.family !== "IPv4" || element.internal !== false){return;}
+      ip = element.address;
+    });
+  });
+
+  res.json({"ipaddress":ip, "language":"probably english", "software":"who knows?"});
 });
 
 
