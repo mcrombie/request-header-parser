@@ -8,7 +8,8 @@
 	},
 	"dependencies": {
 		"cors": "^2.8.5",
-		"express": "^5.0.0-alpha.7"
+		"express": "^5.0.0-alpha.7",
+		"node": "^13.6.0"
 	},
 	"engines": {
 		"node": "4.4.5"
