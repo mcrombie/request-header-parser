@@ -27,6 +27,8 @@ let networkInterfaces = os.networkInterfaces();
 // your first API endpoint... 
 app.get("/api/whoami", function (req, res) {
   let ip;
+  let language;
+  let software;
   //GET IP ADDRESS  -  https://stackoverflow.com/questions/3653065/get-local-ip-address-in-node-js
   Object.keys(networkInterfaces).forEach((networkInterface) => {
     networkInterfaces[networkInterface].forEach((element) => {
@@ -35,7 +37,12 @@ app.get("/api/whoami", function (req, res) {
     });
   });
 
-  res.json({"ipaddress":ip, "language":"probably english", "software":"who knows?"});
+  //GET LANGUAGE
+  console.log(req.headers);
+  language = req.headers["accept-language"];
+  software = req.headers["user-agent"];
+
+  res.json({"ipaddress":ip, "language":language, "software":software});
 });
 
 
